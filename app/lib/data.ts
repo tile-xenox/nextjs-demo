@@ -14,15 +14,15 @@ export async function fetchRevenue() {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     // const data = await sql<Revenue>`SELECT * FROM revenue`;
     const data: { rows: Revenue[] } = {
       rows: [...revenue],
     };
 
-    // console.log('Data fetch completed after 3 seconds.');
+    console.log('Data fetch completed after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -40,6 +40,7 @@ export async function fetchLatestInvoices() {
     //   ORDER BY invoices.date DESC
     //   LIMIT 5`;
     
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const data: { rows: LatestInvoiceRaw[] } = {
       rows: [...invoices]
         .map((v, i) => ({ ...v, id: i + '' }))
@@ -90,6 +91,7 @@ export async function fetchCardData() {
     //   invoiceStatusPromise,
     // ]);
 
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const data = await Promise.all([
       { rows: [{ count: invoices.length }] },
       { rows: [{ count: customers.length }] },
